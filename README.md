@@ -274,32 +274,54 @@ Tugas: Menampilkan pesan acak berdasarkan nilai tick BIOS:
 
 1. Fungsi Matematika
 
-' div(int dividend, int divisor) '
+` div(int dividend, int divisor) `
 * Fungsi: Membagi dua bilangan integer (pembagian lantai).
 * Fitur:
   * Menangani pembagian oleh nol (return 0).
   * Mendukung bilangan negatif (hasil sesuai tanda).
   * Menggunakan loop pengurangan untuk menghitung hasil.
 
-' mod(int dividend, int divisor) '
+` mod(int dividend, int divisor) `
 * Fungsi: Menghitung modulus menggunakan div().
 * Perbedaan dari safe_mod:
   * Lebih efisien dan menangani divisor 0 (return 0).
 
 2. Fungsi String
 
-' strcmp(char *firstStr, char *secondStr) '
+` strcmp(char *firstStr, char *secondStr) `
 * Fungsi: Membandingkan dua string.
-' strcpy(char *destination, char *source) '
+` strcpy(char *destination, char *source) `
 * Fungsi: Menyalin string dari source ke destination.
-' clear(byte *buffer, unsigned int bufferSize) '
+` clear(byte *buffer, unsigned int bufferSize) `
 * Fungsi: Mengosongkan buffer dengan mengisi 0.
 
 3. Konversi Tipe
 
-' atoi(char *inputStr, int *resultNum) '
+` atoi(char *inputStr, int *resultNum) `
 Fungsi: Konversi string ke integer.
 
-' itoa(int inputNum, char *outputStr) '
+` itoa(int inputNum, char *outputStr) `
 Fungsi: Konversi integer ke string.
 
+### MAKEFILE
+
+1. prepare
+* Membuat direktori bin/ jika belum ada
+* Membuat image floppy disk kosong (floppy.img) berukuran 1.44MB (2880 sector × 512 byte)
+
+2. bootloader
+* Mengompilasi bootloader (Assembly) dengan NASM ke bootloader.bin
+* Menulis bootloader ke sector pertama floppy image
+
+3. stdlib
+* Mengompilasi library standar (C) dengan BCC (Bruce's C Compiler)
+
+4. shell
+* Mengompilasi shell (C) dengan BCC
+
+5. kernel
+* Mengompilasi kernel (C + Assembly) dengan BCC dan NASM
+
+6. link
+* Melakukan linking semua komponen kernel (kernel.o, shell.o, std_lib.o) menjadi kernel.bin
+* Menulis kernel ke floppy image mulai dari sector kedua (seek=1)
