@@ -4,8 +4,9 @@
 
 Nama | NRP
 --- | ---
-Amoes Noland | 5027231028
-Rafi' Afnaan Fathurrahman | 5027231040
+Theodorus Aaron Ugraha | 5027241056
+Muhammad Afrizan Rasya | 5027241048
+Salomo | 5027221063
 
 ## Daftar Isi
 

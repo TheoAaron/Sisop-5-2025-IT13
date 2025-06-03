@@ -5,6 +5,9 @@
 
 void shell();
 void parseCommand(char *buf, char *cmd, char arg[2][64]);
+void running(char *cmd, char *buf, char arg[2][64]);
+void userName(char *word);
+void generateResponse();
 
 // Tambahkan fungsi bila perlu
 
