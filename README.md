@@ -181,5 +181,88 @@ https://github.com/user-attachments/assets/0f580958-16d7-4322-8a09-98f521d21135
 
 > Isi sesuai pengerjaan.
 
-Disini kami akan memaparkan pengerjaan soal SISOP modul 5 
-di bawah adalah penjelasannya
+Disini kami akan memaparkan pengerjaan soal SISOP modul 5, di bawah adalah penjelasannya :
+
+### shell.h
+
+Jadi di file ini kami menambahkan 3 fungsi yaitu :
+- void running : bertanggung jawab untuk mengeksekusi perintah yang diterima dari input shell.
+- void userName : digunakan untuk mengelola nama pengguna (username) dalam shell.
+- void generateRsponse : bertugas untuk menghasilkan respons atau umpan balik dari shell setelah suatu perintah dijalankan.
+
+### kernel.c
+
+1. Fungsi main
+Fungsi:
+* Membersihkan layar (clearScreen) dengan skema warna putih (0x0F).
+* Memanggil fungsi shell() untuk menjalankan shell interaktif.
+
+2. Fungsi printString
+Fungsi: Mencetak string ke layar menggunakan interrupt BIOS 0x10 (servis video).
+* Cara Kerja:
+  * Loop melalui setiap karakter hingga menemukan null terminator (\0).
+  * Menggunakan interrupt 0x10 dengan kode 0x0E00 (cetak karakter dalam mode teks).
+
+3. Fungsi readString
+Fungsi: Membaca input dari keyboard dan menyimpannya ke buffer.
+* Fitur:
+  * Mendukung backspace (0x08) untuk menghapus karakter.
+  * Mengabaikan karakter non-ASCII (hanya menerima 32-126).
+  * Menambahkan \r\n (Enter) dan null terminator (\0) di akhir string.
+  * Input maksimal 126 karakter (untuk mencegah overflow).
+
+4. Fungsi clearScreen
+Fungsi: Membersihkan layar dan mengatur skema warna.
+* Cara Kerja:
+  * Menulis spasi (' ') ke seluruh memori video 0xB800 (mode teks 80x25).
+  * Setiap karakter diikuti byte atribut warna (colorScheme).
+  * Menggunakan interrupt 0x10 servis 0x0200 untuk memindahkan cursor ke awal.
+
+### shell.c
+
+1. Variabel Global
+* currentUser[64]: Menyimpan nama pengguna (default: "user").
+* serverName[64]: Menyimpan suffix server (kosong default).
+* displayColor: Skema warna tampilan (default: 0x0F/putih).
+
+2. Fungsi shell()
+* Fungsi Utama: Loop tak terbatas untuk menerima input pengguna.
+* Alur:
+1. Tampilkan prompt (userName).
+2. Baca input (readString).
+3. Parsing input (parseCommand).
+4. Eksekusi perintah (running).
+
+3. Fungsi userName()
+* Tugas: Menampilkan prompt shell (format: username@serverName$ ).
+* Contoh Output:
+  * user$ (jika serverName kosong).
+  * user@Storm$ (jika serverName diisi).
+
+4. Fungsi parseCommand()
+* Tugas: Memisahkan input menjadi:
+  * command: Perintah utama (kata pertama).
+  * params[2][64]: Dua parameter (opsional).
+* Contoh:
+  Input "add 5 3" →
+  command = "add", params[0] = "5", params[1] = "3".
+
+5. Fungsi running()
+* Tugas: Mengeksekusi perintah yang di-parsing.
+* Daftar Perintah:
+  * yo/gurt: Menampilkan pesan balik ("yo" ↔ "gurt").
+  * user <name>: Mengganti currentUser.
+  * grandcompany <nama>
+* clear: Reset serverName dan warna ke default.
+* Operasi Aritmetika:
+  * add/sub/mul/div <n1> <n2>: Menghitung hasil operasi.
+  * Validasi pembagian oleh nol (div).
+* info: Menampilkan informasi sistem (termasuk currentUser).
+* yogurt: Memanggil generateResponse() untuk respons acak.
+* help: Menampilkan daftar perintah.
+
+6. Fungsi generateResponse()
+Tugas: Menampilkan pesan acak berdasarkan nilai tick BIOS:
+* Contoh output: "yo", "sygau", atau "ts unami gng </3".
+
+### 
