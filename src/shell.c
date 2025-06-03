@@ -11,12 +11,6 @@ void parseCommand(char *buffer, char *command, char params[2][64]);
 void generateResponse(void);
 void running(char *command, char *buffer, char params[2][64]);
 
-bool isValidCommand(char *cmd);
-void handleGrandCompany(char *company);
-void handleYogurt();
-void handleGurt(char *input);
-int strlen(char *str);
-
 void shell()
 {
   char inputBuffer[128];
