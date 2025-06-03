@@ -193,17 +193,20 @@ Jadi di file ini kami menambahkan 3 fungsi yaitu :
 ### kernel.c
 
 1. Fungsi main
+
 Fungsi:
 * Membersihkan layar (clearScreen) dengan skema warna putih (0x0F).
 * Memanggil fungsi shell() untuk menjalankan shell interaktif.
 
 2. Fungsi printString
+
 Fungsi: Mencetak string ke layar menggunakan interrupt BIOS 0x10 (servis video).
 * Cara Kerja:
   * Loop melalui setiap karakter hingga menemukan null terminator (\0).
   * Menggunakan interrupt 0x10 dengan kode 0x0E00 (cetak karakter dalam mode teks).
 
 3. Fungsi readString
+
 Fungsi: Membaca input dari keyboard dan menyimpannya ke buffer.
 * Fitur:
   * Mendukung backspace (0x08) untuk menghapus karakter.
@@ -212,6 +215,7 @@ Fungsi: Membaca input dari keyboard dan menyimpannya ke buffer.
   * Input maksimal 126 karakter (untuk mencegah overflow).
 
 4. Fungsi clearScreen
+
 Fungsi: Membersihkan layar dan mengatur skema warna.
 * Cara Kerja:
   * Menulis spasi (' ') ke seluruh memori video 0xB800 (mode teks 80x25).
@@ -262,7 +266,40 @@ Fungsi: Membersihkan layar dan mengatur skema warna.
 * help: Menampilkan daftar perintah.
 
 6. Fungsi generateResponse()
+
 Tugas: Menampilkan pesan acak berdasarkan nilai tick BIOS:
 * Contoh output: "yo", "sygau", atau "ts unami gng </3".
 
-### 
+### std_lib.c
+
+1. Fungsi Matematika
+
+' div(int dividend, int divisor) '
+* Fungsi: Membagi dua bilangan integer (pembagian lantai).
+* Fitur:
+  * Menangani pembagian oleh nol (return 0).
+  * Mendukung bilangan negatif (hasil sesuai tanda).
+  * Menggunakan loop pengurangan untuk menghitung hasil.
+
+' mod(int dividend, int divisor) '
+* Fungsi: Menghitung modulus menggunakan div().
+* Perbedaan dari safe_mod:
+  * Lebih efisien dan menangani divisor 0 (return 0).
+
+2. Fungsi String
+
+' strcmp(char *firstStr, char *secondStr) '
+* Fungsi: Membandingkan dua string.
+' strcpy(char *destination, char *source) '
+* Fungsi: Menyalin string dari source ke destination.
+' clear(byte *buffer, unsigned int bufferSize) '
+* Fungsi: Mengosongkan buffer dengan mengisi 0.
+
+3. Konversi Tipe
+
+' atoi(char *inputStr, int *resultNum) '
+Fungsi: Konversi string ke integer.
+
+' itoa(int inputNum, char *outputStr) '
+Fungsi: Konversi integer ke string.
+
