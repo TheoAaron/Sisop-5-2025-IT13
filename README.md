@@ -180,3 +180,6 @@ https://github.com/user-attachments/assets/0f580958-16d7-4322-8a09-98f521d21135
 ## Laporan
 
 > Isi sesuai pengerjaan.
+
+Disini kami akan memaparkan pengerjaan soal SISOP modul 5 
+di bawah adalah penjelasannya
