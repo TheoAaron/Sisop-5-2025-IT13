@@ -1,6 +1,4 @@
 #include "kernel.h"
-#include "std_lib.h"
-#include "std_type.h"
 #include "shell.h"
 
 char username[32] = "user";
